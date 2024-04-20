@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- CSS styles -->
+  <style>
+    /* CSS styles */
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+
+    body {
+      background-image: url("img/quiz5.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .quiz-container {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+      width: 600px;
+      overflow: hidden;
+    }
+
+    .quiz-header {
+      padding: 4rem;
+    }
+
+    h2 {
+      padding: 1rem;
+      text-align: center;
+      margin: 0;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+
+    ul li label {
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #03cae4;
+      color: #fff;
+      border: none;
+      display: block;
+      width: 100%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-family: inherit;
+      padding: 1.3rem;
+    }
+
+    button:hover {
+      background-color: #04adc4;
+    }
+
+    button:focus {
+      outline: none;
+      background-color: #44b927;
+    }
+
+    .timer {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #ffcc00;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    @media screen and (max-width: 768px) {
+      body {
+        background-image: url("img/quiz5small.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+    }
+  </style>
+  <title>Quiz App</title>
+</head>
+<body>
+
+<div class="quiz-container" id="quiz">
+  <div class="quiz-header">
+    <h2 id="question">Question Text</h2>
+    <ul>
+      <li>
+        <input type="radio" name="answer" id="a" class="answer">
+        <label for="a" id="a_text">Answer</label>
+      </li>
+      <li>
+        <input type="radio" name="answer" id="b" class="answer">
+        <label for="b" id="b_text">Answer</label>
+      </li>
+      <li>
+        <input type="radio" name="answer" id="c" class="answer">
+        <label for="c" id="c_text">Answer</label>
+      </li>
+      <li>
+        <input type="radio" name="answer" id="d" class="answer">
+        <label for="d" id="d_text">Answer</label>
+      </li>
+    </ul>
+  </div>
+
+  <button id="submit">Submit</button>
+  <button id="skip">Skip</button>
+</div>
+<div class="timer" id="timerDisplay"></div>
+
+<script>
+  const quizData = [
+    {
+      question: "Q1. The C-preprocessors are specified with _________ symbol.",
+      a: "#",
+      b: "$",
+      c: "“ ”",
+      d: "&",
+      correct: "a",
+    },
+    {
+      question: "Q2. What is the main function of a compiler in programming?", 
+      a: "To write code",
+      b: "To interpret code",
+      c: "To convert code into machine language",
+      d: "To debug code",
+      correct: "c",
+    },
+    {
+      question: "Q3. Which of the following is not a keyword in C?",
+      a: "int",
+      b: "char",
+      c: "include",
+      d: "float",
+      correct: "c",
+    },
+    {
+      question: "Q4. What is required in each C program? ",
+      a: "a.	The program must have at least one function.",
+      b: "b.	The program does not require any function.",
+      c: "c.	Input data.",
+      d: "d.	Output data.",
+      correct: "a",
+    },
+    {
+        question: "Q5. which should not be a keyword?",
+      a: "a. if",
+      b: "b. for",
+      c: "c. While",
+      d: "d. break",
+      correct: "c",
+    }, 
+	{
+      question: "Q6. How are String represented in memory in C?",
+      a: "a.	An array of characters",
+      b: "b.	The object of some class",
+      c: "c.	Same as other primitive data types.",
+      d: "d.	LinkedList of characters.",
+      correct: "a",
+    },
+{
+      question: "Q7. What is the size of 'int' data type in C?",
+      a: "a.	Depends on the system.",
+      b: "b.	4 bytes",
+      c: "c.	8 bytes",
+      d: "d.	2 bytes",
+      correct: "a",
+    },
+{
+      question: "Q8. How many times will the following loop execute? for(j = 1; j <= 10; j = j-1)  ",
+      a: "10 times",
+      b: "5 times",
+      c: "Never",
+      d: "Forever",
+      correct: "d",
+    },
+{
+      question: "Q9. if a = 3, res = a++ + ++a + a++ + ++a. Final value of res is?",
+      b: "b.	24",
+      c: "c.	20",
+      d: "d.	18",
+      correct: "c",
+    },
+{
+      question: "Q10. A pointer is a memory address. Suppose the pointer variable has p address 1000, and that p is declared to have type int*, and an int is 4 bytes long. What address is represented by expression p + 2?",
+      a: "1002",
+      b: "1004",
+      c: "1008",
+      d: "1006",
+      correct: "c",
+    },
+  {
+      question: "Q11. Which of the following is an exit-controlled loop??",
+      a: "for",
+      b: "while",
+      c: "switch",
+      d: "do while.",
+      correct: "d",
+    },
+    {
+      question: "Q12. char c = 'C'. What is ASCII value of C", 
+      a: "65",
+      b: "66",
+      c: "67",
+      d: "68",
+      correct: "c",
+    },
+    {
+        question: "Q13. & is used for",
+      a: "address"
+      b: "value",
+      c: "index",
+      d: "both a and b",
+      correct: "a",
+    },
+    {
+      question: "Q14. Q14. Directives are translated by the",
+      a: "a.	Pre-processor",
+      b: "b.	Compiler",
+      c: "c.	Linker",
+      d: "d.	Editor",
+      correct: "a",
+    },
+    {
+      question: "Q15. The following C declarations struct node{int i;float j;};struct node *s[10] ;define s to be:",
+      a: "An array, each element of which is a pointer to a structure of type node.",
+      b: "A structure of 3 fields: an integer, a float, and an array of 10 elements",
+      c: "An array, each element of which is a structure of type node.",
+      d: "A structure of 2 fields, each field being a pointer to an array of 10 elements",
+      correct: "a",
+    }, 
+	{
+      question: "Q16. What is the result of the logical expression (1 && 0)?",
+      a: "1",
+      b: "0",
+      c: "true",
+      d: "false",
+      correct: "b",
+    },
+{
+      question: "Q17. Which operator has higher precedence, '+' or '*'? ",
+      a: "*",
+      b: "Both are same",
+      c: "+",
+      d: "None",
+      correct: "a",
+    },
+{
+      question: "Q18. The value printed by the following program isvoid f(int* p, int m){m = m + 5;*p = *p + m;return;} void main(){int i=5, j=10;f(&i, j);printf(\"%d\", i+j);}",
+      a: "10",
+      b: "20",
+      c: "30",
+      d: "40",
+      correct: "b",
+    },
+{
+      question: "Q19. Which of the following are correct file opening modes in C?",
+      a: "r",
+      b: "rb",
+      c: "w",
+      d: "All the above",
+      correct: "d",
+    },
+{
+      question: "Q20. What is a pointer?",
+      a: "A keyword used to create variables",
+      b: "A variable used to store address of an instruction.",
+      c: "A variable used to store address of other variable.",
+      d: "A variable used to store address of a structure.",
+      correct: "c",
+    },
+  {
+      question: "Q21. The definition of the function abort() is in which header file?",
+      a: "stdlib.h",
+      b: "assert.h",
+      c: "stdio.h",
+      d: "stdarg.h",
+      correct: "a",
+    },
+    {
+      question: "Q22. int a = 9/5 What will be the output of this statement?", 
+      a: "1.8",
+      b: "1.0",
+      c: "2.0",
+      d: "None of the these",
+      correct: "d",
+    },
+    {
+      question: "Q23. A global variable is declared __________.",
+      a: "Inside of the function",
+      b: "Outside of the function",
+      c: "With the function",
+      d: "Anywhere in the program",
+      correct: "b",
+    },
+    {
+      question: "Q24. if x = 1, y = 2 then what will be output of x > y ? Greater : x == y ? Equal: Lesser",
+      a: "Greater ",
+      b: "Equal",
+      c: "Lesser",
+      d: "None of the above",
+      correct: "c",
+    },
+    {
+      question: "Q25. if x = 10. res= x++ + ++x.What is final value of res",
+      a: "20",
+      b: "21",
+      c: "22",
+      d: "23",
+      correct: "c",
+    }, 
+	{
+      question: "Q26. In a switch statement, what happens if a break statement is omitted from a case?",
+      a: "The program exits.",
+      b: "The case is skipped.",
+      c: "Fall-through to the next case.",
+      d: "Syntax error",
+      correct: "c",
+    },
+{
+      question: "Q27. What does 'pass by value' mean in C?",
+      a: "Passing a copy of the argument",
+      b: "Passing the argument directly",
+      c: "Passing the memory address",
+      d: "Passing the variable type",
+      correct: "a",
+    },
+{
+      question: "Q28. Which of the following is true about return type of functions in C? ",
+      a: "Functions can return any type.",
+      b: "Functions can return any type except array and functions.",
+      c: "Functions can return any type except array, functions, and union.",
+      d: "Functions can return any type except array, functions, function pointer and union.",
+      correct: "b",
+    },
+{
+      question: "Q29. How does dynamic memory allocation differ between malloc and calloc?",
+      a: "malloc initializes memory to zero, calloc does not.",
+      b: "calloc initializes memory to zero, malloc does not.",
+      c: "They don't differ.",
+      d: "malloc allocates more efficiently.",
+      correct: "b",
+    },
+{
+      question: "Q30. What is the return value of strcmp when the two strings are equal in C?",
+      a: "0",
+      b: "1",
+      c: "-1",
+      d: "The length of the strings",
+      correct: "a",
+    },
+  ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  var timer;
+  var timeLimit = 3600; // Time limit for the entire quiz in seconds (30 minutes)
+  var timeLeft = timeLimit;
+  var lastQuestionTime; // Variable to store the time when the last question is submitted or skipped
+  const quiz = document.getElementById('quiz');
+  const answerEls = document.querySelectorAll('.answer');
+  const questionEl = document.getElementById('question');
+  const a_text = document.getElementById('a_text');
+  const b_text = document.getElementById('b_text');
+  const c_text = document.getElementById('c_text');
+  const d_text = document.getElementById('d_text');
+  const submitBtn = document.getElementById('submit');
+  const skipBtn = document.getElementById('skip');
+  const timerDisplay = document.getElementById('timerDisplay');
+
+  let currentQuiz = 0;
+  let score = 0;
+  let skipQues = 0;
+  let finalresult;
+
+  // Call loadQuiz function when the page loads
+  window.onload = loadQuiz;
+  loadQuiz(); // Load the first question when the page loads
+    startTimer(); // Start the timer after loading the first question
+
+  function loadQuiz() {
+    deselectAnswers();
+
+    const currentQuizData = quizData[currentQuiz];
+
+    questionEl.innerText = currentQuizData.question;
+    a_text.innerText = currentQuizData.a;
+    b_text.innerText = currentQuizData.b;
+    c_text.innerText = currentQuizData.c;
+    d_text.innerText = currentQuizData.d;
+
+    // Clear previous timer before starting a new one
+    stopTimer();
+    startTimer();
+  }
+
+  function deselectAnswers() {
+    answerEls.forEach(answerEl => answerEl.checked = false);
+  }
+
+  function getSelected() {
+    let answer;
+    answerEls.forEach(answerEl => {
+      if (answerEl.checked) {
+        answer = answerEl.id;
+      }
+    });
+    return answer;
+  }
+
+  function startTimer() {
+    timer = setInterval(function () {
+        timeLeft--;
+        if (timeLeft <= 0) {
+            submitQuiz();
+        } else {
+            var hours = Math.floor(timeLeft / 3600);
+            var minutes = Math.floor((timeLeft % 3600) / 60);
+            var seconds = timeLeft % 60;
+            timerDisplay.textContent = `Time Left: ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+    }, 1000);
+}
+
+
+  function stopTimer() {
+    clearInterval(timer);
+  }
+
+  submitBtn.addEventListener('click', () => {
+    const answer = getSelected();
+    if (answer) {
+      if (answer === quizData[currentQuiz].correct) {
+        score += 1; // Increment by 1 for correct answer
+      } else {
+        score -= 0.33; // Deduct 0.25 for incorrect answer
+      }
+
+      currentQuiz++;
+
+      if (currentQuiz < quizData.length) {
+        loadQuiz(); // Load the next question
+      } else {
+        finishQuiz();
+      }
+    }
+  });
+
+  skipBtn.addEventListener('click', () => {
+    skipQues++;
+    currentQuiz++;
+
+    if (currentQuiz < quizData.length) {
+      loadQuiz(); // Load the next question
+    } else {
+      finishQuiz();
+    }
+  });
+
+  function finishQuiz() {
+    stopTimer();
+    const hours = Math.floor(timeLeft / 3600);
+    const minutes = Math.floor((timeLeft % 3600) / 60);
+    const seconds = timeLeft % 60;
+    lastQuestionTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`; // Store the time when the last question is submitted or skipped in hours:minutes:seconds format
+
+    // Send score, lastQuestionTime, and other data to score.php
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "score.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log("Score and last question time stored successfully");
+                window.location.href = "thankyou.html"; // Redirect after score submission
+            } else {
+                console.error("Error storing score and last question time:", xhr.status);
+            }
+        }
+    }
+    xhr.send("score=" + encodeURIComponent(score.toFixed(2)) + "&lastQuestionTime=" + lastQuestionTime);
+}
+
+
+  window.addEventListener('blur', function () {
+    submitQuiz(); // Automatically submit quiz when the window loses focus
+  });
+
+  if (sessionStorage.getItem('quizCompleted')) {
+    // If quiz completed, redirect to thank you page
+    window.location.href = 'error.html';
+  }
+
+  // Add event listener to store completion status when leaving the page
+  window.addEventListener('beforeunload', function() {
+    sessionStorage.setItem('quizCompleted', true);
+  });
+
+  window.onload = function() {
+    if(performance.navigation.type == 1) {
+      // Redirect to another page
+      window.location.href = "error.html";
+    }
+  }
+
+</script>
+
+</body>
+</html>

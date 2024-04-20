@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<style>
+    body {
+        margin-top: 300px;
+        margin-left: 50%; /* Center the background horizontally */
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url('img/login.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-color: transparent; /* Transparent background */
+    }
+
+    .login-container { 
+        width: 250px; /* Increased width to accommodate centered elements */
+        margin: 0 auto; /* Center the container horizontally */
+        padding: 40px;
+        background-color: rgba(0, 0, 0, 0.2); /* Transparent black background */
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); /* Shadow effect */
+    }
+
+    .login-container:hover{
+        box-shadow: 0px 0px 10px rgb(163, 163, 233);
+    }
+
+    .login-container h2 {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode';
+        color: aliceblue;
+        text-align: center;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 65%; /* Adjusted width to accommodate padding */
+        padding: 10px;
+        margin: 10px auto; /* Center the input boxes and button */
+        display: block; /* Display elements as blocks */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .login-form input[type="submit"] {
+
+        width: 50%;
+        background-color: #75a6b8a7;
+        padding: 10px;
+        margin: 10px auto; /* Center the input boxes and button */
+        display: block; /* Display elements as blocks */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .login-form input[type="submit"]:hover {
+        background-color:rgba(0, 0, 0, 0.5);
+    }
+    .errorMessage {
+        display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+        .button {
+            margin-left: 100px;
+            margin-top: 8vh;
+        }
+
+        .login-container { 
+            margin-left: -45%;
+            width: 250px; /* Increased width to accommodate centered elements */
+            margin-top: 50vh; /* Center the container horizontally */
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.2); /* Transparent black background */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); /* Shadow effect */
+    }
+    }
+    @media screen and (max-width: 768px) {
+        body{
+            background-image: url("img/loginsmall.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .button {
+            margin-left: 100px;
+            margin-top: vh;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>MODULE 1</h2>
+        <form class="login-form" action="logindb.php" method="post" id="loginForm" onsubmit="validateLogin(event)">
+            <input type="text" id="tname" name="tname" placeholder="Team Name" required>
+            <input type="text" id="tid" name="tid" placeholder="Team ID" required>
+            <input type="text" id="memname" name="memname" placeholder="Member Name" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="submit" value="LOGIN">
+        </form>
+        <div class="error-message" id="errorMessage"></div>
+        </div>
+
+        
+</body>
+</html>

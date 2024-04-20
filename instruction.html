@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTRUCTIONS FOR THE QUIZ</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url("img/ins.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    
+    .container {
+      margin-top: 150px;
+      text-align: center;
+      max-width: 600px;
+      padding: 20px;
+      background-color: white; /* Transparent black background */
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .container:hover{
+        box-shadow: 0px 0px 10px rgb(163, 163, 233);
+    }
+
+    h1 {
+        color: rgb(167, 243, 15);
+      margin-top: 0;
+      background-image: linear-gradient(to bottom right, #41697b, #65abcb);
+      border-radius: 10px;
+    }
+
+    h3 {
+        color: rgb(255, 0, 0);
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+    ul {
+        font-weight: bold;
+        font-size: 16px;
+        text-align:left;
+        color: black;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .start-button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .start-button a{
+        font-family:'Arial Black';
+        color: black;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    .start-button:hover {
+        background-color: #194557;
+    }
+
+    .start-button a:hover {
+        color: white;
+    }
+
+
+    .button {
+        background-color: #59a0bc; /* Green */
+        border: none;
+        text-align: center;
+        display: inline-block;
+        padding: 15px 32px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition-duration: 0.4s ease-in-out;
+    }
+
+    
+    /* Media query for responsiveness */
+    @media screen and (max-width: 768px) {
+        body{
+            background-image: url("img/inssmall.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+          text-align: center;
+          max-width: 550px;
+          padding: 20px;
+          background-color: white; /* Transparent black background */
+          border-radius: 10px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+          margin-top: 150px;
+    }
+
+        }
+
+    @media screen and (max-width: 480px) {
+        .button {
+            align-items: center;
+            margin-left: 100px;
+            margin-top: vh;
+        }
+    }
+
+
+  
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>INSTRUCTIONS</h1>
+  <h3>READ ALL THE INSTRUCTIONS CAREFULLY.</h3>
+  <ul>
+    <li>This module includes 30 questions.</li>
+    <li>For each correct answer 1 point will be awarded.</li>    
+    <li>For each incorrect answer  0.25 point will be deducted from your scores.</li>
+    <li>Do not refresh the page during the quiz.</li>
+    <li>Make sure to submit your answers before the time runs out.</li>
+  </ul>
+  <div class="button-container">
+    <button class="start-button"><a href="q2.html">Start Quiz</a></button>
+  </div>
+</div>
+
+</body>
+</html>
